@@ -1,7 +1,7 @@
 const path = require('path');
 module.exports = {
   entry: {
-    'app': './src/main.ts',
+    'app': './src/hacker-news.tsx',
   },
   output: {
     filename: '[name].js'
