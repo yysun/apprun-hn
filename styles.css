@@ -1,11 +1,5 @@
 body {
-  margin:20px;
   overflow:scroll;
-}
-
-#my-app {
-  width: 50%;
-  margin: 0 auto;
 }
 
 .hn ul {
@@ -13,38 +7,27 @@ body {
   margin-left: -30px;
 }
 
-.hn .list-header {
-  display: flex;
-  align-items: baseline;
+.hn .header {
   position: fixed;
-  background-color: white;
-  z-index: 1;
-  top: 0;
+  background-color: rgb(250, 255, 230);
+  top: 0px;
   width: 100%;
 }
 
-.hn .list-header h3 {
-  margin-right:20px;
-}
-
-.hn .item-header {
-  position: fixed;
-  background-color: white;
-  z-index: 1;
-  top: 5px;
-  width: 100%;
-  padding-top: 15px;
+.hn .header .inner {
+  width: 800px;
+  margin: 0 auto;
+  padding: 10px 0;
+  /*border-bottom: 1px solid #333;*/
 }
 
 .hn .story-list {
   list-style: none;
-  margin-left: -50px;
-  margin-top: -20px;
+  padding: 0;
+  width: 800px;
+  margin: 50px auto;
 }
 
-.hn .story {
-  margin-bottom: 10px;
-}
 .hn .story-list li {
   padding: 10px 0;
 }
@@ -54,6 +37,7 @@ body {
   font-size: 1.1em;
   font-weight: 700;
   width: 60px;
+  height: 60px;
   text-align: center;
   float:left;
   padding-top: 10px;
@@ -68,12 +52,10 @@ body {
   cursor: pointer;
 }
 
-.hn .story .meta {
-  margin-bottom: 10px
-}
-
 .hn .comment-list {
-  /*padding-top: 80px*/
+  padding-top: 110px;
+  width: 800px;
+  margin: 0 auto;
 }
 
 .hn .comment {
@@ -91,7 +73,7 @@ body {
   cursor: pointer;
 }
 
-.collapsed {
+.hn .collapsed {
   display: none;
 }
 

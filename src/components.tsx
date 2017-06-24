@@ -69,7 +69,7 @@ export const ListHeader = ({ list, type }) => {
   const style = (enable: boolean) => enable ?
     { cursor: 'pointer' } :
     { 'pointer-events': 'none' };
-  return <div style={{ 'margin-left': '50px' }}>
+  return <div style={{ 'padding-left': '250px' }}>
     <span>{list.pageno} / {list.pages} ({list.items.length})</span>
     &nbsp;&nbsp;<a href={`${root}/${type}/${list.pageno - 1}`} style={style(list.pageno > 1)}>&lt;&lt;</a>
     &nbsp;&nbsp;<a href={`${root}/${type}/${list.pageno + 1}`} style={style(list.pageno < list.pages)}>&gt;&gt;</a>
@@ -83,17 +83,18 @@ export const viewList = (state) => {
   }
   const list = state[state.type];
   return <div className='hn'>
-    <div className='list-header'>
-      <h3>Hacker News</h3>
-      <div>
-        <a style={style('top')} href={`${root}/top`}>Top</a> |&nbsp;
+    <div className='header'>
+      <div className='inner'>
+        <div style={{ 'float': 'left' }}>
+          <a style={style('top')} href={`${root}/top`}>Top</a> |&nbsp;
           <a style={style('new')} href={`${root}/new`}>New</a> |&nbsp;
           <a style={style('best')} href={`${root}/best`}>Best</a> |&nbsp;
           <a style={style('show')} href={`${root}/show`}>Show</a> |&nbsp;
           <a style={style('ask')} href={`${root}/ask`}>Ask</a> |&nbsp;
           <a style={style('job')} href={`${root}/job`}>Jobs</a>
+        </div>
+        <ListHeader list={list} type={state.type} />
       </div>
-      <ListHeader list={list} type={state.type} />
     </div>
     <List list={list} />
   </div>
@@ -102,14 +103,16 @@ export const viewList = (state) => {
 export const viewItem = (state) => {
   const item = state[state.key];
   return <div className='hn'>
-    <div className='item-header'>
-      <a href={`${root}/top`}>Top</a> |&nbsp;
+    <div className='header'>
+      <div className='inner'>
+        <a href={`${root}/top`}>Top</a> |&nbsp;
         <a href={`${root}/new`}>New</a> |&nbsp;
         <a href={`${root}/best`}>Best</a> |&nbsp;
         <a href={`${root}/show`}>Show</a> |&nbsp;
         <a href={`${root}/ask`}>Ask</a> |&nbsp;
         <a href={`${root}/job`}>Jobs</a>
-      <Item item={item} />
+        <Item item={item} />
+      </div>
     </div>
     <div className='comment-list'>
       <Comments item={item} />
