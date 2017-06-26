@@ -76,7 +76,7 @@ export const ListHeader = ({ list, type }) => {
   const style = (enable: boolean) => enable ?
     { cursor: 'pointer' } :
     { 'pointer-events': 'none' };
-  return <div style={{ 'padding-left': '250px' }}>
+  return <div style={{ 'padding-left': '380px' }}>
     <span>{list.min + 1} - {list.max} ({list.items.length})</span>
     {/*&nbsp;&nbsp;<a href={`${root}/${type}/${list.pageno - 1}`} style={style(list.pageno > 1)}>&lt;&lt;</a>
       &nbsp;&nbsp;<a href={`${root}/${type}/${list.pageno + 1}`} style={style(list.pageno < list.pages)}>&gt;&gt;</a>*/}
