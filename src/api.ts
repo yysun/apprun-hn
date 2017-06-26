@@ -14,20 +14,16 @@ export async function fetchList(type): Promise<any> {
   return fetch(`${type}stories`);
 }
 
-export async function fetchListItems(list, pageno): Promise<any> {
-  list.pageno = pageno;
-  list.pages = Math.ceil(list.items.length / list.page_size);
-  if (isNaN(list.pageno) || list.pageno < 1) list.pageno = 1;
-  if (list.pageno > list.pages) list.pageno = list.pages;
+export async function fetchListItems(list): Promise<any> {
   list.items = await Promise.all(list.items.map(async (item, idx) => {
-    return ((Math.floor(idx / list.page_size) === list.pageno - 1) && (typeof item === 'number')) ?
+    return (idx >= list.min && idx < list.max && (typeof item === 'number')) ?
       await fetch(`item/${item}`) : item
   }));
 }
 
 export async function fetchItem(id): Promise<any> {
   const item = await fetch(`item/${id}`);
-  if (item.kids) item.kids = await Promise.all(item.kids.map(async (item) => {
+  if (item && item.kids) item.kids = await Promise.all(item.kids.map(async (item) => {
     return typeof item === 'number' ?
       await fetchItem(item) : item
   }));

@@ -1,6 +1,7 @@
 import app from '../node_modules/apprun/index';
 
 const root = '#hacker-news';
+export const Loading = () => <div className='loading'>Loading ... </div>;
 
 export const Comment = ({ comment }) => {
   if (!comment) return;
@@ -15,12 +16,12 @@ export const Comment = ({ comment }) => {
 }
 
 export const Comments = ({ item }) => {
+  if (!item || !item.kids) return;
   const list = item.kids;
-  if (!list) return;
-  const num = item.kids && item.kids.filter(items => !item.deleted).length;
+  const num = item.kids && item.kids.filter(items => !item.deleted && !item.dead).length;
   return <div>
     {num && <div className='toggle'>{pluralize(num, ' comment')} </div>}
-    <ul> {
+    <ul className='comment-list'> {
       list.filter(item => !item.deleted)
         .map(item => <this.Comment comment={item} />)
     }
@@ -29,6 +30,7 @@ export const Comments = ({ item }) => {
 }
 
 export const Item = ({ item }) => {
+  if (!item) return;
   return <div className='story'>
     <h4><a href={item.url}>{item.title}</a></h4>
     {(item.text) && <div className='text'>{`_html:${item.text}`}</div>}
@@ -43,6 +45,7 @@ export const Item = ({ item }) => {
 }
 
 export const ListItem = ({ item, idx }) => {
+  if (!item) return;
   const item_link = `${root}/item/${item.id}`;
   return <li>
     <div className={'score'}>{item.score}</div>
@@ -57,11 +60,15 @@ export const ListItem = ({ item, idx }) => {
 
 export const List = ({ list }) => {
   if (!list) return;
-  return <ul className='story-list'> {
-    list.items.filter((_, i) => Math.floor(i / list.page_size) === list.pageno - 1)
-      .map(item => <this.ListItem item={item} idx={list.items.indexOf(item) + 1} />)
-  }
-  </ul>;
+  return <div>
+    <ul className='story-list'> {
+      list.items.filter((_, i) => i >= list.min && i < list.max)
+        .map(item => <this.ListItem item={item} idx={list.items.indexOf(item) + 1} />)
+    }
+    </ul>
+    {list.items && list.max < list.items.length &&
+      <div className='more'><a onclick={() => app.run('#more')}>More ...</a></div>}
+  </div>;
 }
 
 export const ListHeader = ({ list, type }) => {
@@ -70,53 +77,9 @@ export const ListHeader = ({ list, type }) => {
     { cursor: 'pointer' } :
     { 'pointer-events': 'none' };
   return <div style={{ 'padding-left': '250px' }}>
-    <span>{list.pageno} / {list.pages} ({list.items.length})</span>
-    &nbsp;&nbsp;<a href={`${root}/${type}/${list.pageno - 1}`} style={style(list.pageno > 1)}>&lt;&lt;</a>
-    &nbsp;&nbsp;<a href={`${root}/${type}/${list.pageno + 1}`} style={style(list.pageno < list.pages)}>&gt;&gt;</a>
-  </div>
-}
-
-
-export const viewList = (state) => {
-  const style = (type) => {
-    return { 'font-weight': state.type === type ? 'bold' : 'normal' }
-  }
-  const list = state[state.type];
-  return <div className='hn'>
-    <div className='header'>
-      <div className='inner'>
-        <div style={{ 'float': 'left' }}>
-          <a style={style('top')} href={`${root}/top`}>Top</a> |&nbsp;
-          <a style={style('new')} href={`${root}/new`}>New</a> |&nbsp;
-          <a style={style('best')} href={`${root}/best`}>Best</a> |&nbsp;
-          <a style={style('show')} href={`${root}/show`}>Show</a> |&nbsp;
-          <a style={style('ask')} href={`${root}/ask`}>Ask</a> |&nbsp;
-          <a style={style('job')} href={`${root}/job`}>Jobs</a>
-        </div>
-        <ListHeader list={list} type={state.type} />
-      </div>
-    </div>
-    <List list={list} />
-  </div>
-}
-
-export const viewItem = (state) => {
-  const item = state[state.key];
-  return <div className='hn'>
-    <div className='header'>
-      <div className='inner'>
-        <a href={`${root}/top`}>Top</a> |&nbsp;
-        <a href={`${root}/new`}>New</a> |&nbsp;
-        <a href={`${root}/best`}>Best</a> |&nbsp;
-        <a href={`${root}/show`}>Show</a> |&nbsp;
-        <a href={`${root}/ask`}>Ask</a> |&nbsp;
-        <a href={`${root}/job`}>Jobs</a>
-        <Item item={item} />
-      </div>
-    </div>
-    <div className='comment-list'>
-      <Comments item={item} />
-    </div>
+    <span>{list.min + 1} - {list.max} ({list.items.length})</span>
+    {/*&nbsp;&nbsp;<a href={`${root}/${type}/${list.pageno - 1}`} style={style(list.pageno > 1)}>&lt;&lt;</a>
+      &nbsp;&nbsp;<a href={`${root}/${type}/${list.pageno + 1}`} style={style(list.pageno < list.pages)}>&gt;&gt;</a>*/}
   </div>
 }
 

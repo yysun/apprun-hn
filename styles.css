@@ -3,8 +3,8 @@ body {
 }
 
 .hn ul {
+  padding: 0;
   list-style: none;
-  margin-left: -30px;
 }
 
 .hn .header {
@@ -14,22 +14,38 @@ body {
   width: 100%;
 }
 
-.hn .header .inner {
+.hn .fixed {
+  position: fixed;
+  width: 100%;
+  top: 20px;
+}
+
+.hn .inner {
   width: 800px;
   margin: 0 auto;
   padding: 10px 0;
   /*border-bottom: 1px solid #333;*/
 }
 
-.hn .story-list {
-  list-style: none;
-  padding: 0;
+
+.hn .list {
   width: 800px;
   margin: 50px auto;
 }
 
+.hn .story-list {
+  margin-left: -18px;
+}
+
 .hn .story-list li {
   padding: 10px 0;
+}
+
+.hn .story {
+  width: 800px;
+  margin: 10px auto;;
+  padding: 10px 0;
+  background-color: #fff;
 }
 
 .hn .score {
@@ -52,10 +68,8 @@ body {
   cursor: pointer;
 }
 
-.hn .comment-list {
-  padding-top: 110px;
-  width: 800px;
-  margin: 0 auto;
+.hn.item .list {
+  padding-top: 60px;
 }
 
 .hn .comment {
@@ -87,6 +101,20 @@ body {
 
 .hn .toggle.closed:after{
   content: ' (...)'
+}
+
+.hn .loading {
+  padding-top: 20px;
+}
+
+.hn .more {
+  width: 800px;
+  margin: 0 auto;
+}
+
+.hn .more a {
+  cursor: pointer;
+  padding-bottom: 150px;
 }
 
 
