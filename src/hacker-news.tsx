@@ -3,7 +3,7 @@ import { fetchList, fetchListItems, fetchItem } from './api';
 import { Comment, Comments, Item, ListItem, List, ListHeader } from './components';
 
 const root = '#hacker-news';
-const page_size = 20;
+const page_size = 30;
 
 export default class HackerNewsComponent extends Component {
 
@@ -31,14 +31,18 @@ export default class HackerNewsComponent extends Component {
     return <div className={`hn ${state.type}`}>
       <div className='header'>
         <div className='inner'>
-          <div style={{'float':'left'}}>
-          <a style={style('top')} href={`${root}/top`}>Top</a> |&nbsp;
-          <a style={style('new')} href={`${root}/new`}>New</a> |&nbsp;
-          <a style={style('best')} href={`${root}/best`}>Best</a> |&nbsp;
-          <a style={style('show')} href={`${root}/show`}>Show</a> |&nbsp;
-          <a style={style('ask')} href={`${root}/ask`}>Ask</a> |&nbsp;
-          <a style={style('job')} href={`${root}/job`}>Jobs</a>
+          <div style={{ 'float': 'left' }}>
+            <span style={{ 'margin-right': '20px' }}>
+              <a href='https://github.com/yysun/apprun'>AppRun</a> &#10084;&nbsp;
+              <a href='https://news.ycombinator.com'>HN</a></span>
+            <a style={style('top')} href={`${root}/top`}>Top</a> |&nbsp;
+            <a style={style('new')} href={`${root}/new`}>New</a> |&nbsp;
+            <a style={style('best')} href={`${root}/best`}>Best</a> |&nbsp;
+            <a style={style('show')} href={`${root}/show`}>Show</a> |&nbsp;
+            <a style={style('ask')} href={`${root}/ask`}>Ask</a> |&nbsp;
+            <a style={style('job')} href={`${root}/job`}>Jobs</a>
           </div>
+          <div style={{ 'float': 'right' }}><a href='https://github.com/yysun/apprun-hn'>Github</a></div>
           {extra}
         </div>
       </div>
