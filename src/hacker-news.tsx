@@ -1,6 +1,5 @@
 import app, { Component } from '../node_modules/apprun/index';
 import { fetchList, fetchListItems, fetchItem } from './api';
-import { Comment, Comments, Item, ListItem, List, ListHeader } from './components';
 
 const root = '#hacker-news';
 const page_size = 30;
@@ -11,6 +10,86 @@ export default class HackerNewsComponent extends Component {
     type: 'top',
   };
 
+  Loading = () => <div className='loading'>Loading ... </div>;
+
+  Comment = ({ comment }) => {
+    if (!comment) return;
+    return <li className='comment'>
+      <div className='meta'>
+        <span>by {comment.by}</span> |&nbsp;
+        <span>{timeAgo(comment.time)} ago</span>
+      </div>
+      <div className='text'>{`_html:${comment.text}`}</div>
+      <this.Comments item={comment} />
+    </li>
+  }
+
+  Comments = ({ item }) => {
+    if (!item || !item.kids) return;
+    const list = item.kids;
+    const num = item.kids && item.kids.filter(items => !item.deleted && !item.dead).length;
+    return <div>
+      {num && <div className='toggle'>{pluralize(num, ' comment')} </div>}
+      <ul className='comment-list'> {
+        list.filter(item => !item.deleted)
+          .map(item => <this.Comment comment={item} />)
+      }
+      </ul>
+    </div>;
+  }
+
+  Item = ({ item }) => {
+    if (!item) return;
+    return <div className='story'>
+      <h4><a href={item.url}>{item.title}</a></h4>
+      {(item.text) && <div className='text'>{`_html:${item.text}`}</div>}
+      <div className='meta'>
+        <span>{pluralize(item.score, ' point')}</span> |&nbsp;
+        <span>by {item.by}</span> |&nbsp;
+        <span>{timeAgo(item.time)} ago</span> |&nbsp;
+        <span>{pluralize(item.descendants, ' comment')} (in total)  |&nbsp;</span>
+        <span><a onclick={() => history.back()}>back</a></span>
+      </div>
+    </div>
+  }
+
+  ListItem = ({ item, idx }) => {
+    if (!item) return;
+    const item_link = `${root}/item/${item.id}`;
+    return <li>
+      <div className={'score'}>{item.score}</div>
+      <div><a href={item.url || item_link}>{item.title}</a></div>
+      <div className='meta'>
+        <span>by {item.by}</span> |&nbsp;
+        <span>{timeAgo(item.time)} ago</span> |&nbsp;
+        <span><a href={`${item_link}`} >{pluralize(item.descendants, ' comment')}</a></span>
+      </div>
+    </li>
+  }
+
+  List = ({ list }) => {
+    if (!list) return;
+    return <div>
+      <ul className='story-list'> {
+        list.items.filter((_, i) => i >= list.min && i < list.max)
+          .map(item => <this.ListItem item={item} idx={list.items.indexOf(item) + 1} />)
+      }
+      </ul>
+      {list.items && list.max < list.items.length &&
+        <div className='more'><a onclick={() => this.run('more')}>More ...</a></div>}
+    </div>;
+  }
+
+  ListHeader = ({ list, type }) => {
+    if (!list) return;
+    const style = (enable: boolean) => enable ?
+      { cursor: 'pointer' } :
+      { 'pointer-events': 'none' };
+    return <div style={{ 'padding-left': '380px' }}>
+      <span>{list.min + 1} - {list.max} ({list.items.length})</span>
+    </div>
+  }
+
   view = (state) => {
     let extra, _list, _item
     if (state instanceof Promise) {
@@ -18,12 +97,12 @@ export default class HackerNewsComponent extends Component {
       return
     } else if (state.type === 'item') {
       const item = state[state.key];
-      _item = <Item item={item} />
-      _list = <Comments item={item} />
+      _item = <this.Item item={item} />
+      _list = <this.Comments item={item} />
     } else {
       const list = state[state.type];
-      extra = <ListHeader list={list} type={state.type} />
-      _list = <List list={list} />
+      extra = <this.ListHeader list={list} type={state.type} />
+      _list = <this.List list={list} />
     }
     const style = (mtype) => {
       return { 'font-weight': mtype === state.type ? 'bold' : 'normal' }
@@ -63,7 +142,7 @@ export default class HackerNewsComponent extends Component {
         this.showItem(state, args[0]) :
         this.showList(state, type, args[0])
     },
-    '#more': async (state) => {
+    'more': async (state) => {
       const list = state[state.type];
       if (list && list.items) {
         list.max = Math.min(list.max + page_size, list.items.length)
@@ -128,6 +207,22 @@ document.body.addEventListener('click', e => {
     t.nextElementSibling && t.nextElementSibling.classList.toggle('collapsed');
   }
 });
+
+function pluralize(number, label) {
+  if (!number) number = 0;
+  return (number === 1) ? number + label : number + label + 's'
+}
+
+function timeAgo(time) {
+  const between = Date.now() / 1000 - Number(time)
+  if (between < 3600) {
+    return pluralize(~~(between / 60), ' minute')
+  } else if (between < 86400) {
+    return pluralize(~~(between / 3600), ' hour')
+  } else {
+    return pluralize(~~(between / 86400), ' day')
+  }
+}
 
 const element = document.getElementById('my-app');
 new HackerNewsComponent().mount(element);
