@@ -1,3 +1,6 @@
+$link_color: #337ab7;
+$comment_link_color: #096;
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -14,9 +17,28 @@ body {
 }
 
 a {
-  color: #337ab7;
+  color: $link_color;
   text-decoration: none;
   background-color: transparent;
+}
+
+.inner {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 992px) {
+  .inner {
+    width: 970px;
+  }
+}
+
+@media (min-width: 768px) {
+  .inner {
+    width: 750px;
+  }
 }
 
 .hn ul {
@@ -29,29 +51,17 @@ a {
   background-color: rgb(250, 255, 230);
   top: 0px;
   width: 100%;
+  padding: 10px 0;
 }
 
 .hn .fixed {
   position: fixed;
   width: 100%;
-  top: 20px;
-}
-
-.hn .inner {
-  width: 800px;
-  margin: 0 auto;
-  padding: 10px 0;
-  /*border-bottom: 1px solid #333;*/
-}
-
-
-.hn .list {
-  width: 800px;
-  margin: 50px auto;
+  top: 50px;
 }
 
 .hn .story-list {
-  margin-left: -18px;
+  padding-top: 50px;
 }
 
 .hn .story-list li {
@@ -59,9 +69,8 @@ a {
 }
 
 .hn .story {
-  width: 800px;
-  margin: 10px auto;;
-  padding: 10px 0;
+  padding-top: 50px;
+  padding-bottom: 10px;
   background-color: #fff;
 }
 
@@ -81,12 +90,8 @@ a {
 }
 
 .hn .meta a {
-  color: #096;
+  color: $comment_link_color;
   cursor: pointer;
-}
-
-.hn.item .list {
-  padding: 80px 10px;
 }
 
 .hn .comment {
@@ -99,7 +104,7 @@ a {
 }
 
 .hn .toggle {
-  color: #096;
+  color: $comment_link_color;
   padding-bottom: 10px;
   cursor: pointer;
 }
@@ -125,8 +130,8 @@ a {
 }
 
 .hn .more {
-  width: 800px;
-  margin: 0 auto;
+  margin-top:20px;
+  margin-left: 20px;
 }
 
 .hn .more a {

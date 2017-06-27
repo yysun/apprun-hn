@@ -75,23 +75,15 @@ export default class HackerNewsComponent extends Component {
           .map(item => <this.ListItem item={item} idx={list.items.indexOf(item) + 1} />)
       }
       </ul>
-      {list.items && list.max < list.items.length &&
-        <div className='more'><a onclick={() => this.run('more')}>More ...</a></div>}
+      <div className='more'>
+        <span>{list.min + 1} - {list.max} ({list.items.length}) &nbsp;</span>
+        {list.items && list.max < list.items.length && <a onclick={() => this.run('more')}> |&nbsp; More ...</a>}
+      </div>
     </div>;
   }
 
-  ListHeader = ({ list, type }) => {
-    if (!list) return;
-    const style = (enable: boolean) => enable ?
-      { cursor: 'pointer' } :
-      { 'pointer-events': 'none' };
-    return <div style={{ 'padding-left': '380px' }}>
-      <span>{list.min + 1} - {list.max} ({list.items.length})</span>
-    </div>
-  }
-
   view = (state) => {
-    let extra, _list, _item
+    let _list, _item
     if (state instanceof Promise) {
       // extra = <this.Loading />
       return
@@ -101,11 +93,10 @@ export default class HackerNewsComponent extends Component {
       _list = <this.Comments item={item} />
     } else {
       const list = state[state.type];
-      extra = <this.ListHeader list={list} type={state.type} />
       _list = <this.List list={list} />
     }
-    const style = (mtype) => {
-      return { 'font-weight': mtype === state.type ? 'bold' : 'normal' }
+    const style = (type) => {
+      return { 'font-weight': type === state.type ? 'bold' : 'normal' }
     }
     return <div className={`hn ${state.type}`}>
       <div className='header'>
@@ -121,14 +112,11 @@ export default class HackerNewsComponent extends Component {
               <a style={style('ask')} href={`${root}/ask`}>Ask</a> |&nbsp;
               <a style={style('job')} href={`${root}/job`}>Jobs</a>
           </div>
-          <div style={{ 'float': 'right' }}><a href='https://github.com/yysun/apprun-hn'>Github</a></div>
-          {extra}
+          {/*<div style={{ 'float': 'right' }}><a href='https://github.com/yysun/apprun-hn'>Github</a></div>*/}
         </div>
       </div>
-      <div className='fixed'>
+      <div className='inner'>
         {_item}
-      </div>
-      <div className='list'>
         {_list}
       </div>
     </div>
