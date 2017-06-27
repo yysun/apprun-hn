@@ -1,5 +1,6 @@
 $link_color: #337ab7;
 $comment_link_color: #096;
+$header_color: #faffe6;
 
 * {
   box-sizing: border-box;
@@ -48,7 +49,7 @@ a {
 
 .hn .header {
   position: fixed;
-  background-color: rgb(250, 255, 230);
+  background-color: $header_color;
   top: 0px;
   width: 100%;
   padding: 10px 0;

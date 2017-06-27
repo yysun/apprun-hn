@@ -22,8 +22,16 @@ module.exports = {
   },
   plugins: [
     new workboxPlugin({
-      globDirectory: DIST_DIR,
-      // staticFileGlobs: ['**/*.{html,js,css}'],
+      globDirectory: "./",
+      globPatterns: [
+        "**/*.{html,css,js}"
+      ],
+      globIgnores: [
+        "node_modules/**",
+        "webpack.config.js",
+        "dist/sw.js",
+        "dist/workbox-*.js"
+      ],
       swDest: path.join(DIST_DIR, 'sw.js'),
     }),
   ]
