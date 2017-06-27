@@ -35,12 +35,12 @@ export default class HackerNewsComponent extends Component {
             <span style={{ 'margin-right': '20px' }}>
               <a href='https://github.com/yysun/apprun'>AppRun</a> &#10084;&nbsp;
               <a href='https://news.ycombinator.com'>HN</a></span>
-            <a style={style('top')} href={`${root}/top`}>Top</a> |&nbsp;
-            <a style={style('new')} href={`${root}/new`}>New</a> |&nbsp;
-            <a style={style('best')} href={`${root}/best`}>Best</a> |&nbsp;
-            <a style={style('show')} href={`${root}/show`}>Show</a> |&nbsp;
-            <a style={style('ask')} href={`${root}/ask`}>Ask</a> |&nbsp;
-            <a style={style('job')} href={`${root}/job`}>Jobs</a>
+              <a style={style('top')} href={`${root}/top`}>Top</a> |&nbsp;
+              <a style={style('new')} href={`${root}/new`}>New</a> |&nbsp;
+              <a style={style('best')} href={`${root}/best`}>Best</a> |&nbsp;
+              <a style={style('show')} href={`${root}/show`}>Show</a> |&nbsp;
+              <a style={style('ask')} href={`${root}/ask`}>Ask</a> |&nbsp;
+              <a style={style('job')} href={`${root}/job`}>Jobs</a>
           </div>
           <div style={{ 'float': 'right' }}><a href='https://github.com/yysun/apprun-hn'>Github</a></div>
           {extra}
@@ -66,7 +66,7 @@ export default class HackerNewsComponent extends Component {
     '#more': async (state) => {
       const list = state[state.type];
       if (list && list.items) {
-        list.max = Math.min(list.max + 20, list.items.length)
+        list.max = Math.min(list.max + page_size, list.items.length)
         await fetchListItems(state[state.type]);
       }
       this.setState(state); // ?
