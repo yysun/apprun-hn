@@ -18,6 +18,7 @@ module.exports = {
     ]
   },
   devServer: {
+    publicPath: `/${DIST_DIR}/`
   },
   plugins: [
     new workboxPlugin({
