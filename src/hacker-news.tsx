@@ -1,4 +1,4 @@
-import app, { Component } from '../node_modules/apprun/index';
+import app, { Component } from 'apprun';
 import { fetchList, fetchListItems, fetchItem } from './api';
 
 const root = '#hacker-news';
@@ -123,7 +123,7 @@ export default class HackerNewsComponent extends Component {
   }
 
   update = {
-    '/': _ => app.run(root),
+    '#': _ => app.run(root),
     '#hacker-news': async (state, type, ...args) => {
       type = type || state.type
       return type === 'item' ?
@@ -136,7 +136,6 @@ export default class HackerNewsComponent extends Component {
         list.max = Math.min(list.max + page_size, list.items.length)
         await fetchListItems(state[state.type]);
       }
-      this.setState(state); // ?
       return state;
     }
   }
@@ -167,7 +166,6 @@ export default class HackerNewsComponent extends Component {
     }
 
     await fetchListItems(new_state[type]);
-    this.setState(new_state); // ?
     return new_state;
   }
 
@@ -182,7 +180,6 @@ export default class HackerNewsComponent extends Component {
       console.log(`fetch: ${key}`);
       new_state[key] = await fetchItem(id);
     }
-    this.setState(new_state); // ?
     return new_state;
   }
 
@@ -213,4 +210,4 @@ function timeAgo(time) {
 }
 
 const element = document.getElementById('my-app');
-new HackerNewsComponent().mount(element);
+new HackerNewsComponent().start(element);
