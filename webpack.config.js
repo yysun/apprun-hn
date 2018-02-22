@@ -10,7 +10,7 @@ module.exports = {
     path: path.resolve(__dirname, DIST_DIR),
   },
   resolve: {
-    extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js']
+    extensions: ['.ts', '.tsx', '.js']
   },
   module: {
     rules: [
@@ -18,7 +18,12 @@ module.exports = {
     ]
   },
   devServer: {
-    publicPath: `/${DIST_DIR}/`
+    publicPath: './',
+    open: true
+  },
+  devtool: "source-map",
+  externals: {
+    "firebase": "firebase"
   },
   plugins: [
     new workboxPlugin({
@@ -32,7 +37,7 @@ module.exports = {
         "dist/sw.js",
         "dist/workbox-*.js"
       ],
-      swDest: path.join(DIST_DIR, 'sw.js'),
+      swDest: './sw.js',
     }),
   ]
 }

@@ -1,6 +1,9 @@
 import app, { Component } from 'apprun';
 import { fetchList, fetchListItems, fetchItem } from './api';
 
+app.on('//', _ => { });
+app.on('#', _ => { });
+
 const root = '#hacker-news';
 const page_size = 30;
 
@@ -110,7 +113,8 @@ export default class HackerNewsComponent extends Component {
               <a style={style('best')} href={`${root}/best`}>Best</a> |&nbsp;
               <a style={style('show')} href={`${root}/show`}>Show</a> |&nbsp;
               <a style={style('ask')} href={`${root}/ask`}>Ask</a> |&nbsp;
-              <a style={style('job')} href={`${root}/job`}>Jobs</a>
+              <a style={style('job')} href={`${root}/job`}>Jobs</a> |&nbsp;
+              <a style='' href='https://github.com/yysun/apprun-hn'>Github</a>
           </div>
           {/*<div style={{ 'float': 'right' }}><a href='https://github.com/yysun/apprun-hn'>Github</a></div>*/}
         </div>
