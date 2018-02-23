@@ -120,8 +120,7 @@ export default class HackerNewsComponent extends Component {
       <div className='inner'>
         {_item}
         {_list}
-        <div style={{ 'text-align': 'right' }}>
-          <br /><br /> <hr />
+        <div style={{ 'margin': '100px 20px' }}>
           (C) Yiyi Sun, 2017-2018, <a style='' href='https://github.com/yysun/apprun-hn'>Source code: Github</a>
         </div>
       </div>

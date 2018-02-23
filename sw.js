@@ -20,7 +20,7 @@ importScripts('workbox-sw.prod.v1.3.0.js');
 const fileManifest = [
   {
     "url": "dist/app.js",
-    "revision": "a66937b9955bb5d58efdbe82ce2ef7e4"
+    "revision": "31f25be1a4b1e321879371786f0e48c9"
   },
   {
     "url": "dist/styles.css",
@@ -32,5 +32,9 @@ const fileManifest = [
   }
 ];
 
-const workboxSW = new self.WorkboxSW();
+const workboxSW = new self.WorkboxSW({
+  "skipWaiting": true,
+  "clientsClaim": true
+});
 workboxSW.precache(fileManifest);
+workboxSW.router.registerRoute(/\//, workboxSW.strategies.staleWhileRevalidate({}), 'GET');

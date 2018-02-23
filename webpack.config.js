@@ -27,10 +27,8 @@ module.exports = {
   },
   plugins: [
     new workboxPlugin({
-      globDirectory: "./",
-      globPatterns: [
-        "**/*.{html,css,js}"
-      ],
+      globDirectory: './',
+      globPatterns: ["**/*.{html,css,js}"],
       globIgnores: [
         "node_modules/**",
         "webpack.config.js",
@@ -38,6 +36,14 @@ module.exports = {
         "dist/workbox-*.js"
       ],
       swDest: './sw.js',
+      clientsClaim: true,
+      skipWaiting: true,
+      runtimeCaching: [
+        {
+          urlPattern: new RegExp('/'),
+          handler: 'staleWhileRevalidate'
+        }
+      ]
     }),
   ]
 }
