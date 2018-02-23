@@ -113,16 +113,19 @@ export default class HackerNewsComponent extends Component {
               <a style={style('best')} href={`${root}/best`}>Best</a> |&nbsp;
               <a style={style('show')} href={`${root}/show`}>Show</a> |&nbsp;
               <a style={style('ask')} href={`${root}/ask`}>Ask</a> |&nbsp;
-              <a style={style('job')} href={`${root}/job`}>Jobs</a> |&nbsp;
-              <a style='' href='https://github.com/yysun/apprun-hn'>Github</a>
+              <a style={style('job')} href={`${root}/job`}>Jobs</a>
           </div>
-          {/*<div style={{ 'float': 'right' }}><a href='https://github.com/yysun/apprun-hn'>Github</a></div>*/}
         </div>
       </div>
       <div className='inner'>
         {_item}
         {_list}
+        <div style={{ 'text-align': 'right' }}>
+          <br /><br /> <hr />
+          (C) Yiyi Sun, 2017-2018, <a style='' href='https://github.com/yysun/apprun-hn'>Source code: Github</a>
+        </div>
       </div>
+
     </div>
   }
 
