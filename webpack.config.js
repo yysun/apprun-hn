@@ -3,11 +3,10 @@ const workboxPlugin = require('workbox-webpack-plugin');
 const DIST_DIR = 'dist';
 module.exports = {
   entry: {
-    'app': './src/hacker-news.tsx',
+    'dist/app': './src/hacker-news.tsx',
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, DIST_DIR),
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js']
@@ -18,7 +17,6 @@ module.exports = {
     ]
   },
   devServer: {
-    publicPath: './',
     open: true
   },
   devtool: "source-map",
