@@ -1,6 +1,7 @@
 $link_color: #337ab7;
 $comment_link_color: #096;
 $header_color: #faffe6;
+$footer_color: #ffffff;
 
 * {
   box-sizing: border-box;
@@ -23,6 +24,11 @@ a {
   background-color: transparent;
 }
 
+ul {
+  padding: 0;
+  list-style: none;
+}
+
 .inner {
   padding-right: 15px;
   padding-left: 15px;
@@ -42,11 +48,6 @@ a {
   }
 }
 
-.hn ul {
-  padding: 0;
-  list-style: none;
-}
-
 .hn .header {
   position: fixed;
   background-color: $header_color;
@@ -55,24 +56,21 @@ a {
   padding: 10px 0;
 }
 
-.hn .fixed {
-  position: fixed;
-  width: 100%;
-  top: 50px;
+.hn .main {
+  padding: 50px 0px;
 }
 
-.hn .story-list {
-  padding-top: 50px;
+.hn .footer {
+  position: fixed;
+  background-color: $footer_color;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
 }
 
 .hn .story-list li {
   padding: 10px 0;
-}
-
-.hn .story {
-  padding-top: 50px;
-  padding-bottom: 10px;
-  background-color: #fff;
 }
 
 .hn .score {
@@ -124,10 +122,6 @@ a {
 
 .hn .toggle.closed:after{
   content: ' (...)'
-}
-
-.hn .loading {
-  padding-top: 20px;
 }
 
 .hn .more {
