@@ -24,11 +24,11 @@ const fileManifest = [
   },
   {
     "url": "dist/styles.css",
-    "revision": "d657f271b3720340aede2d4fa9405332"
+    "revision": "88137b27bbf2ddd80ab92c768742efb2"
   },
   {
     "url": "index.html",
-    "revision": "696df3e4c551fdcbd321bce289be37bc"
+    "revision": "30357e3e3547f6ace641641042d62f42"
   }
 ];
 
