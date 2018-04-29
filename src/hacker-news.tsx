@@ -132,7 +132,11 @@ const update = {
   },
 }
 
-app.start('my-app', state, view, update);
+const STORAGE_KEY = 'hn';
+const rendered = state => localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+const stored = localStorage.getItem(STORAGE_KEY)
+
+app.start('my-app', state, view, update, { rendered });
 
 document.body.addEventListener('click', e => {
   const t = e.target as HTMLElement;
