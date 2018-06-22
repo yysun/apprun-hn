@@ -35,7 +35,7 @@ const Comments = ({ item }) => {
 const Item = ({ item }) => {
   if (!item) return;
   return <div className='story'>
-    <h4><a href={item.url}>{item.title}</a></h4>
+    <h4><a href={item.url} target="_blank">{item.title}</a></h4>
     {(item.text) && <div className='text'>{`_html:${item.text}`}</div>}
     <div className='meta'>
       <span>{pluralize(item.score, ' point')}</span> |&nbsp;
@@ -53,11 +53,11 @@ const ListItem = ({ item, idx }) => {
   const item_link = `#/item/${item.id}`;
   return <li>
     <div className={'score'}>{item.score}</div>
-    <div><a href={item.url || item_link}>{item.title}</a></div>
+    <div><a href={item.url || item_link} target="_blank">{item.title}</a></div>
     <div className='meta'>
       <span>by {item.by}</span> |&nbsp;
         <span>{timeAgo(item.time)} ago</span> |&nbsp;
-        <span><a href={`${item_link}`} >{pluralize(item.descendants, ' comment')}</a></span>
+        <span><a href={`${item_link}`}>{pluralize(item.descendants, ' comment')}</a></span>
     </div>
   </li>
 }
