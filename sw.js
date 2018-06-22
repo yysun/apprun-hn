@@ -20,7 +20,7 @@ importScripts('workbox-sw.prod.v1.3.0.js');
 const fileManifest = [
   {
     "url": "dist/app.js",
-    "revision": "063ff2192bf2a93d5d59d31d6603ef5a"
+    "revision": "959e1a98f472a564f16083e87a90f697"
   },
   {
     "url": "dist/styles.css",
@@ -28,7 +28,7 @@ const fileManifest = [
   },
   {
     "url": "index.html",
-    "revision": "94ddf2078b55240ef6aaaced8394c573"
+    "revision": "984a35ce3327597611822ebd19924ddb"
   }
 ];
 
