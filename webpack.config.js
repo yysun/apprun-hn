@@ -20,9 +20,6 @@ module.exports = {
     open: true
   },
   devtool: "source-map",
-  externals: {
-    "firebase": "firebase"
-  },
   plugins: [
     new workboxPlugin({
       globDirectory: './',
