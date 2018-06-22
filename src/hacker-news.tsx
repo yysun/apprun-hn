@@ -152,7 +152,14 @@ const update = {
   'refresh': (state, id, data) => {
     state[id] = data;
     if(id === state.id) return state;
-  }
+  },
+  'more': state => {
+    if (isNaN(state.id)) {
+      const list = state[state.id];
+      list.max = Math.min(list.max + page_size, list.items.length)
+      getList(state.id, 0, list.max);
+    }
+  },
 };
 
 app.start('my-app', state, view, update);
