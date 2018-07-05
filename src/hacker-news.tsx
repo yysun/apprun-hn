@@ -1,10 +1,7 @@
 import app from 'apprun';
 import './api';
 
-app.on('//', _ => { });
 const page_size = 30;
-
-const state = {};
 
 const Comment = ({ comment }) => {
   if (!comment) return;
@@ -25,8 +22,8 @@ const Comments = ({ item }) => {
   return <div>
     {num && <div className='toggle'>{pluralize(num, ' comment')} </div>}
     <ul className='comment-list'> {
-      list.filter(item => !item.deleted)
-        .map(item => <Comment comment={item} />)
+      list.filter(comment => !comment.deleted)
+        .map(comment => <Comment comment={comment} />)
     }
     </ul>
   </div>;
@@ -131,11 +128,8 @@ const update = {
   },
 }
 
-// const STORAGE_KEY = 'hn';
-// const rendered = state => localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-// const stored = localStorage.getItem(STORAGE_KEY)
 
-app.start('my-app', state, view, update);
+app.start('my-app', {}, view, update);
 
 document.body.addEventListener('click', e => {
   const t = e.target as HTMLElement;

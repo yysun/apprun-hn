@@ -14,9 +14,9 @@ const fetch = async (path): Promise<any> => {
 
 const fetchItem = async (id): Promise<any> => {
   const item = await fetch(`item/${id}`);
-  if (item && item.kids) item.kids = await Promise.all(item.kids.map(async (item) => {
-    return typeof item === 'number' ?
-      await fetchItem(item) : item
+  if (item && item.kids) item.kids = await Promise.all(item.kids.map(async kid => {
+    return typeof kid === 'number' ?
+      await fetchItem(kid) : kid
   }));
   return item;
 }
@@ -44,9 +44,9 @@ app.on('get-item', (id, state) => {
   ref.on('value', async snapshot => {
     state[id] = snapshot.val();
     if (state[id].kids) {
-      state[id].kids = await Promise.all(state[id].kids.map(async (id) => {
-        return typeof id === 'number' ?
-          await fetchItem(id) : id
+      state[id].kids = await Promise.all(state[id].kids.map(async kid => {
+        return typeof kid === 'number' ?
+          await fetchItem(kid) : kid
       }));
     }
     app.run('render');

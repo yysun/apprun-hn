@@ -23,11 +23,12 @@
   },
   "homepage": "https://github.com/yysun/apprun-hn#readme",
   "dependencies": {
-    "apprun": "^1.13.3",
+    "apprun": "^1.13.7",
     "firebase": "^5.0.4"
   },
   "devDependencies": {
     "ts-loader": "^3.5.0",
+    "tslint": "^5.10.0",
     "typescript": "^2.9.2",
     "webpack": "^3.11.0",
     "webpack-dev-server": "^2.11.2",
