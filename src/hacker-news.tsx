@@ -18,11 +18,11 @@ const Comment = ({ comment }) => {
 const Comments = ({ item }) => {
   if (!item || !item.kids) return;
   const list = item.kids;
-  const num = item.kids && item.kids.filter(items => !item.deleted && !item.dead).length;
+  const num = item.kids && item.kids.filter(items => item && !item.deleted && !item.dead).length;
   return <div>
     {num && <div className='toggle'>{pluralize(num, ' comment')} </div>}
     <ul className='comment-list'> {
-      list.filter(comment => !comment.deleted)
+      list.filter(comment => comment && !comment.deleted)
         .map(comment => <Comment comment={comment} />)
     }
     </ul>
@@ -82,8 +82,7 @@ const view = state => {
       <div className='inner'>
         <div style={{ 'float': 'left' }}>
           <span style={{ 'margin-right': '20px' }}>
-            <a href='https://github.com/yysun/apprun'>AppRun</a> &#10084;&nbsp;
-            <a href='https://news.ycombinator.com'>HN</a>
+            <a href='#'>AppRun&#10084;&nbsp;HN</a>
           </span>
           <a style={style('top')} href={`#/top`}>Top</a> |&nbsp;
           <a style={style('new')} href={`#/new`}>New</a> |&nbsp;
@@ -112,7 +111,7 @@ const view = state => {
 
 const update = {
   '#': (state, type, id) => {
-    type = type || state.type || 'top';
+    type = type || 'top';
     state.type = type;
     state[type] = state[type] || { min: 0, max: page_size, items: [] };
     state.id = id;
