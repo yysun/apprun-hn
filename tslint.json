@@ -84,7 +84,7 @@
     "no-empty-interface": {"severity": "warning"},
 
     // Warn when an import will have side effects.
-    "no-import-side-effect": {"severity": "warning"},
+    // "no-import-side-effect": {"severity": "warning"},
 
     // Warn when variables are defined with var. Var has subtle meaning that can lead to bugs. Strongly prefer const for
     // most values and let for values that will change.

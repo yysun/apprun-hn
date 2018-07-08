@@ -7,8 +7,8 @@ const db = firebase.database().ref('/v0');
 
 const fetch = async (path): Promise<any> => {
   const ref = db.child(path);
-  return new Promise((resolve, reject) => {
-    ref.once('value', snapshot => resolve(snapshot.val()), reject);
+  return new Promise((resolve) => {
+    ref.once('value', snapshot => resolve(snapshot.val())); // tslint:disable-line
   })
 }
 
@@ -21,7 +21,7 @@ const fetchItem = async (id): Promise<any> => {
   return item;
 }
 
-app.on('get-list', (type, list) => {
+app.on('get-list', async (type, list) => {
   const fetchListItems = async ({ items, min, max }) => {
     await Promise.all(items.map(async (id, idx) => {
       if (idx >= min && idx < max && (typeof id === 'number')) {
@@ -30,12 +30,15 @@ app.on('get-list', (type, list) => {
     }));
     app.run('render');
   }
-  if (list.items.length) return fetchListItems(list);
-  const ref = db.child(`${type}stories`);
-  ref.on('value', async snapshot => {
-    list.items = snapshot.val();
-    fetchListItems(list);
-  })
+  if (list.items.length) {
+    await fetchListItems(list);
+  } else {
+    const ref = db.child(`${type}stories`);
+    ref.on('value', async snapshot => {
+      list.items = snapshot.val();
+      await fetchListItems(list);
+    });
+  }
 });
 
 app.on('get-item', (id, state) => {
@@ -50,6 +53,6 @@ app.on('get-item', (id, state) => {
       }));
     }
     app.run('render');
-  })
+  });
 });
 

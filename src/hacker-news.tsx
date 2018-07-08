@@ -11,7 +11,7 @@ const Comment = ({ comment }) => {
       <span>{timeAgo(comment.time)} ago</span>
     </div>
     <div className='text'>{`_html:${comment.text}`}</div>
-    <Comments item={comment} />
+    <Comments item={comment} />  {/* tslint:disable-line */}
   </li>
 }
 
@@ -115,8 +115,9 @@ const update = {
     state.type = type;
     state[type] = state[type] || { min: 0, max: page_size, items: [] };
     state.id = id;
-    type === 'item' ?
-      app.run('get-item', id, state) :
+    if (type === 'item')
+      app.run('get-item', id, state);
+    else
       app.run('get-list', type, state[type]);
   },
   'render': state => state,

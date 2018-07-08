@@ -4,6 +4,7 @@
   "description": "Hacker News Reader made using AppRun",
   "main": "index.js",
   "scripts": {
+    "lint": "tslint --project tsconfig.json",
     "start": "webpack-dev-server",
     "build:css": "node-sass --output-style compressed styles.scss dist/styles.css",
     "build": "webpack -p"
