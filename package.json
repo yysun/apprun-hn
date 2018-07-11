@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "lint": "tslint --project tsconfig.json",
-    "start": "webpack-dev-server",
-    "build:css": "node-sass --output-style compressed styles.scss dist/styles.css",
+    "start": "webpack-dev-server --content-base=./docs",
+    "build:css": "node-sass --output-style compressed styles.scss docs/dist/styles.css",
     "build": "webpack -p"
   },
   "repository": {

@@ -3,7 +3,7 @@ const workboxPlugin = require('workbox-webpack-plugin');
 const DIST_DIR = 'dist';
 module.exports = {
   entry: {
-    'dist/app': './src/hacker-news.tsx',
+    'docs/dist/app': './src/hacker-news.tsx',
   },
   output: {
     filename: '[name].js',
@@ -22,7 +22,7 @@ module.exports = {
   devtool: "source-map",
   plugins: [
     new workboxPlugin({
-      globDirectory: './',
+      globDirectory: './docs',
       globPatterns: ["**/*.{html,css,js}"],
       globIgnores: [
         "node_modules/**",
@@ -30,7 +30,7 @@ module.exports = {
         "dist/sw.js",
         "dist/workbox-*.js"
       ],
-      swDest: './sw.js',
+      swDest: './docs/sw.js',
       clientsClaim: true,
       skipWaiting: true,
       runtimeCaching: [
