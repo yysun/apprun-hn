@@ -1,6 +1,6 @@
 import app from 'apprun';
-import * as firebase from 'firebase/app';
-import 'firebase/database';
+
+declare let firebase;
 
 firebase.initializeApp({ databaseURL: 'https://hacker-news.firebaseio.com' });
 const db = firebase.database().ref('/v0');

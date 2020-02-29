@@ -103,7 +103,7 @@ const view = state => {
     <div className='footer'>
       <div className='inner'>
         Powered by <a href='https://github.com/yysun/apprun'>AppRun</a>,
-        Source code: <a href='https://github.com/yysun/apprun-hn'>Github</a>
+        Source code: <a href='https://github.com/yysun/apprun-hn'>Github.</a>
       </div>
     </div>
   </div>
@@ -129,7 +129,7 @@ const update = {
 }
 
 
-app.start('my-app', {}, view, update);
+app.start(document.body, {}, view, update);
 
 document.body.addEventListener('click', e => {
   const t = e.target as HTMLElement;

@@ -7,7 +7,8 @@
     "lint": "tslint --project tsconfig.json",
     "start": "webpack-dev-server",
     "build:css": "node-sass --output-style compressed styles.scss dist/styles.css",
-    "build": "webpack -p"
+    "workbox": "workbox generateSW",
+    "build": "webpack -p && npm run workbox"
   },
   "repository": {
     "type": "git",
@@ -23,16 +24,14 @@
     "url": "https://github.com/yysun/apprun-hn/issues"
   },
   "homepage": "https://github.com/yysun/apprun-hn#readme",
-  "dependencies": {
-    "apprun": "^1.13.7",
-    "firebase": "^5.2.0"
-  },
   "devDependencies": {
-    "ts-loader": "^3.5.0",
-    "tslint": "^5.10.0",
-    "typescript": "^2.9.2",
-    "webpack": "^3.12.0",
-    "webpack-dev-server": "^2.11.2",
-    "workbox-webpack-plugin": "^1.3.0"
+    "apprun": "^2.23.1",
+    "ts-loader": "^6.2.1",
+    "tslint": "^6.0.0",
+    "typescript": "^3.8.3",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3",
+    "workbox-cli": "^5.0.0"
   }
 }
