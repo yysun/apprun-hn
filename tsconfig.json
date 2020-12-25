@@ -1,9 +1,14 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2015",
+    "module": "esnext",
+    "moduleResolution": "node",
     "jsx": "react",
-    "reactNamespace": "app",
+    "jsxFactory": "app.h",
+    "jsxFragmentFactory": "app.Fragment",
     "lib": ["dom", "es2015", "es5"],
-    "sourceMap": true
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "outDir": "dist"
   }
 }
