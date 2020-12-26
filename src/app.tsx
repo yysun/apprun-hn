@@ -1,5 +1,5 @@
 import app from 'apprun';
-import './api';
+import { getList, getItem } from './api';
 
 const page_size = 30;
 
@@ -18,13 +18,11 @@ const Comment = ({ comment }) => {
 const Comments = ({ item }) => {
   if (!item || !item.kids) return;
   const list = item.kids;
-  const num = item.kids && item.kids.filter(items => item && !item.deleted && !item.dead).length;
+  const num = item.kids.length;
   return <div>
     {num && <div className='toggle'>{pluralize(num, ' comment')} </div>}
-    <ul className='comment-list'> {
-      list.filter(comment => comment && !comment.deleted)
-        .map(comment => <Comment comment={comment} />)
-    }
+    <ul className='comment-list'>
+      { list.map(comment => <Comment comment={comment} />)}
     </ul>
   </div>;
 }
@@ -75,7 +73,6 @@ const List = ({ list }) => {
 }
 
 const view = state => {
-  if (state instanceof Promise) return;
   const style = (type) => ({ 'font-weight': type === state.type ? 'bold' : 'normal' });
   return <div className={`hn ${state.type}`}>
     <div className='header'>
@@ -96,8 +93,8 @@ const view = state => {
     <div className='main'>
       <div className='inner'>
         {state.type === 'item' ?
-          <Item item={state[state.id]} /> :
-          <List list={state[state.type]} />}
+          <Item item={state.item} /> :
+          <List list={state.list} />}
       </div>
     </div>
     <div className='footer'>
@@ -110,24 +107,22 @@ const view = state => {
 }
 
 const update = {
-  '#': (state, type, id) => {
-    type = type || 'top';
+  '#': async (state, type = 'top', id) => {
     state.type = type;
-    state[type] = state[type] || { min: 0, max: page_size, items: [] };
     state.id = id;
     if (type === 'item')
-      app.run('get-item', id, state);
-    else
-      app.run('get-list', type, state[type]);
+      state.item = await getItem(id);
+    else {
+      state.list = await getList(type, 0, page_size);
+    }
+    return state;
   },
   'render': state => state,
-  'more': state => {
-    const list = state[state.type];
-    list.max = Math.min(list.max + page_size, list.items.length)
-    app.run('get-list', state.type, list);
+  'more': async state => {
+    state.list = await getList(state.type, state.list.min, state.list.max + page_size);
+    return state;
   },
 }
-
 
 app.start(document.body, {}, view, update);
 
