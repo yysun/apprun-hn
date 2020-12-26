@@ -19,19 +19,20 @@
   </style>
   <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+  <script src="https://unpkg.com/apprun/dist/apprun-dev-tools.js"></script>
 </head>
 <body>
-  <script src="dist/app.js"></script>
+  <script type="module" src="dist/app.js"></script>
   <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js').then(function (registration) {
-        // Registration was successful
-        console.log('ServiceWorker registration successful with scope: ', registration.scope);
-      }).catch(function (err) {
-        // registration failed :(
-        console.log('ServiceWorker registration failed: ', err);
-      });
-    }
+    // if ('serviceWorker' in navigator) {
+    //   navigator.serviceWorker.register('sw.js').then(function (registration) {
+    //     // Registration was successful
+    //     console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    //   }).catch(function (err) {
+    //     // registration failed :(
+    //     console.log('ServiceWorker registration failed: ', err);
+    //   });
+    // }
   </script>
 </body>
 </html>

@@ -16,7 +16,11 @@ module.exports = {
   sourcemap: false,
   runtimeCaching: [
     {
-      urlPattern: new RegExp("https://www.gstatic.comy"),
+      urlPattern: new RegExp("https://unpkg.com"),
+      handler: "StaleWhileRevalidate"
+    },
+    {
+      urlPattern: new RegExp("https://www.gstatic.com"),
       handler: "StaleWhileRevalidate"
     },
     {
