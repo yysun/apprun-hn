@@ -5,12 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "run-p start:tsc start:server",
-    "build": "run-s build:tsc build:workbox",
+    "build": "run-s build:*",
     "start:tsc": "tsc -w",
     "start:server": "esm-server --watch=dist",
-    "build:css": "node-sass --output-style compressed styles.scss dist/styles.css",
-    "build:workbox": "workbox generateSW",
-    "build:tsc": "webpack --mode production && npm run workbox"
+    "build_:css": "node-sass --output-style compressed styles.scss dist/styles.css",
+    "build:js": "webpack --mode production",
+    "build:workbox": "workbox generateSW"
   },
   "repository": {
     "type": "git",
